@@ -91,4 +91,14 @@ public class DataController {
         }
     }
 
+    @RequestMapping(value = "getAllMedicines", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Map<String, Object> getAllMedicines() {
+        try {
+            return ResponseHandler.success(dataHandler.getAllMedicines());
+        } catch (VCare e) {
+            return ResponseHandler.error(e);
+        }
+    }
+
 }

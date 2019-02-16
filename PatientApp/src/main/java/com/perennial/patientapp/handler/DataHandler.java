@@ -123,4 +123,17 @@ public class DataHandler implements IDataHandler {
         }
         return list;
     }
+
+    public List<MedicineVO> getAllMedicines() throws VCare {
+
+        List<KeyValue> orderBy = new ArrayList();
+        orderBy.add(new KeyValue("name", "asc"));
+
+        List<IGenericVO> objectList = salesDAO.getObjectList(MedicineVO.class, null, orderBy, null, null);
+        List<MedicineVO> list = new ArrayList<>();
+        for (IGenericVO obj : objectList) {
+            list.add((MedicineVO) obj);
+        }
+        return list;
+    }
 }
