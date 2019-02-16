@@ -1,4 +1,4 @@
-package com.perennial.patientapp;
+package com.perennial.patientapp.controller;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
