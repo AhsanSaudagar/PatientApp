@@ -13,7 +13,7 @@ public class DiseaseVO {
 
 
     @Column(name = "DISEASE_NAME")
-    String diseaseName;
+    private String diseaseName;
 
     public long getId() {
         return id;
