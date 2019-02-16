@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value="patient")
+@RequestMapping(value = "patient")
 public class DataController {
 
 
