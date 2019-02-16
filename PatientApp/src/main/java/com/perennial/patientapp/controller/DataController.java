@@ -1,11 +1,15 @@
 package com.perennial.patientapp.controller;
 
+import com.perennial.patientapp.exception.VCare;
 import com.perennial.patientapp.handler.DataHandler;
+import com.perennial.patientapp.util.ResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value="patient")
@@ -23,10 +27,13 @@ public class DataController {
 
     @RequestMapping(value = "getUserDetails", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String saveKpiData(@RequestParam("id") int id, HttpServletRequest request) {
+    public Map<String, Object> saveKpiData(@RequestParam("id") int id, HttpServletRequest request) {
 
-
-        return null;
+        try {
+            return ResponseHandler.success(dataHandler.getUserDetails(id));
+        } catch (VCare | IOException e) {
+            return ResponseHandler.error(e);
+        }
     }
 
 }
