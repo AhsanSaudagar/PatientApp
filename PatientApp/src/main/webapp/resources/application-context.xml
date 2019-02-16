@@ -24,21 +24,6 @@
 	</bean>
 
 	<!-- MySQL data source -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="${host}/${database}?autoReconnect=true" />
-		<property name="username" value="${username}" />
-		<property name="password" value="${password}" />
-		<property name="accessToUnderlyingConnectionAllowed" value="true" />
-		<!-- pool size -->
-		<property name="initialSize" value="20" />
-		<property name="minIdle" value="0"></property>
-		<property name="maxIdle" value="18"></property>
-		<!-- Validation Query:The SQL query that will be used to validate connections 
-			from this pool before returning them to the caller. -->
-		<property name="validationQuery" value="SELECT 1"></property>
-	</bean>
 
 	<!-- Hibernate session factory -->
 	<bean id="hibernateSessionFactory"

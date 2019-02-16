@@ -31,9 +31,6 @@
 	</bean>
 
 
-	<mvc:resources mapping="/images/**"
-		location="${externalFilePath}" />
-
 	<bean id="xmlMessageConverter"
 		class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter">
 	</bean>
