@@ -16,6 +16,8 @@
 	<mvc:annotation-driven />
 	<context:annotation-config />
 
+	<import resource="classpath:application-context.xml" />
+
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 
 	<bean
@@ -28,9 +30,6 @@
 		</property>
 	</bean>
 
-
-	<mvc:resources mapping="/images/**"
-		location="${externalFilePath}" />
 
 	<bean id="xmlMessageConverter"
 		class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter">
@@ -47,4 +46,9 @@
 			</list>
 		</property>
 	</bean>
+
+
+    <bean id="salesDAO" class="com.perennial.patientapp.DAO.PatientAppDAOImpl">
+        <constructor-arg ref="hibernateSessionFactory"/>
+    </bean>
 </beans>
