@@ -1,5 +1,7 @@
 package com.perennial.patientapp.controller;
 
+import com.perennial.patientapp.bean.MedicineShedule;
+import com.perennial.patientapp.bean.SignUpPatient;
 import com.perennial.patientapp.exception.VCare;
 import com.perennial.patientapp.handler.DataHandler;
 import com.perennial.patientapp.util.ResponseHandler;
@@ -18,9 +20,10 @@ public class DataController {
 
     @Autowired
     private DataHandler dataHandler;
+    private MedicineShedule medicineShedule;
 
     @RequestMapping(value = "/addSchedule", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addMedicineSchedule(long patientId){
+    public void addMedicineSchedule(@RequestHeader long patientId, @RequestBody MedicineShedule medicineShedule){
 
     }
 
@@ -28,7 +31,6 @@ public class DataController {
     @RequestMapping(value = "getUserDetails", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Map<String, Object> getUserDetails(@RequestParam("id") int id, HttpServletRequest request) {
-
         try {
             return ResponseHandler.success(dataHandler.getUserDetails(id));
         } catch (VCare | IOException e) {
@@ -46,5 +48,16 @@ public class DataController {
 //        }
 //    }
 
+    @RequestMapping(value = "signUpPatient", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Map<String, Object> SignUpPatient(HttpServletRequest request, @RequestBody SignUpPatient patient) {
+        Map<String, Object> response=null;
+        try {
+            response = dataHandler.signUpPatient(patient);
+        } catch (VCare | IOException e) {
+            return ResponseHandler.error(e);
+        }
+        return ResponseHandler.success(response);
+    }
 
 }
