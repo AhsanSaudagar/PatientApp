@@ -39,6 +39,9 @@ public class ScheduleVO implements IGenericVO {
     @Temporal(TemporalType.TIMESTAMP)
     private Date scheduledTime;
 
+    public ScheduleVO() {
+    }
+
     public long getId() {
         return id;
     }

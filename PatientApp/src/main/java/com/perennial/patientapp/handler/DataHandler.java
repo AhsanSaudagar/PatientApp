@@ -72,18 +72,24 @@ public class DataHandler implements IDataHandler {
 
             ScheduleVO scheduleVO = new ScheduleVO(medicineVo, scheduledQuantity, 0, 0, patientVO, scheduledTime);
             if (jsonObject.has("id")) {
-                long id = (long) jsonObject.get("id");
+                long id = jsonObject.getLong("id");
                 scheduleVO.setId(id);
             }
             salesDAO.saveOrUpdate(scheduleVO);
             jsonObject = new JSONObject();
-            jsonObject.put("Result", "Success");
-
+            jsonObject.put("Result", "Record added successfully");
         } catch (ParseException | org.json.JSONException e) {
             jsonObject = new JSONObject();
             jsonObject.put("Result", "ERROR");
             throw new VCare("MISSING REQUIRED FIELDS");
         }
+        return jsonObject.toString();
+    }
+
+    public String removeSchedule(long scheduleId) throws VCare {
+        salesDAO.deleteById(ScheduleVO.class, scheduleId);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("Result", "Record deleted successfully");
         return jsonObject.toString();
     }
 }

@@ -38,11 +38,22 @@ public class DataController {
         }
     }
 
-    @RequestMapping(value = "addMedicineSchedule", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "MedicineSchedule", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Map<String, Object> addMedicine(HttpServletRequest request, @RequestBody String medicineSchedule, @RequestHeader long patientId) {
         try {
             return ResponseHandler.success(dataHandler.addMedicineSchedule(medicineSchedule, patientId));
+        } catch (Exception e) {
+            return ResponseHandler.error(e);
+        }
+
+    }
+
+    @RequestMapping(value = "MedicineSchedule", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Map<String, Object> addMedicine(@RequestHeader long patientId, @RequestParam long scheduleId) {
+        try {
+            return ResponseHandler.success(dataHandler.removeSchedule(scheduleId));
         } catch (Exception e) {
             return ResponseHandler.error(e);
         }
