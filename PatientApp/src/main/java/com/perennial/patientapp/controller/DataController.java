@@ -10,5 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value="patient")
 public class DataController {
 
+    @RequestMapping(value = "/addSchedule", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void addMedicineSchedule(long patientId){
+
+    }
 
 }
