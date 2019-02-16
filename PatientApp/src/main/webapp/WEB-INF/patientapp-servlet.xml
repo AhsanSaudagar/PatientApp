@@ -11,25 +11,26 @@
       http://www.springframework.org/schema/mvc
       http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">
 
+	<context:component-scan base-package="com.perennial.patientapp" />
 
+	<mvc:annotation-driven />
+	<context:annotation-config />
 
-	<!--<context:component-scan-->
-		<!--base-package="com.perennialsys.gsp.asp.rest,com.perennialsys.gsp.asp.exception,com.perennialsys.gsp.asp.controller, com.perennialsys.gsp.asp.interceptor, com.perennialsys.gsp.pushnotification, com.perennialsys.gsp.asp.scheduler,com.perennial.gsp.asp.swagger.config, com.perennial.gsp.asp.quartz.scheduler,com.perennialsys.ewb.controller, com.perennialsys.asp.ewb.controller,com.perennialsys.asp.ewb.transaction,com.perennialsys.gsp.asp.reports.export" />-->
-	<!--<context:annotation-config />-->
-
-	<mvc:resources mapping="/resources/**"
-		location="/resources/" />
-	<mvc:resources mapping="/images/**"
-		location="${externalFilePath}" />
+	<mvc:resources mapping="/resources/**" location="/resources/" />
 
 	<bean
-		class="org.springframework.web.servlet.view.BeanNameViewResolver" />
+			class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/views/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
 
-	<!-- <bean id="xmlMessageConverter" class="org.springframework.web.servlet.view.xml.MarshallingView"> 
-		<constructor-arg> <bean class="org.springframework.oxm.jaxb.Jaxb2Marshaller"> 
-		<property name="classesToBeBound"> <list> <value>com.perennialsys.gsp.asp.bean.XMLConnectorAuthenticateResponse 
-		</value> <value>com.perennialsys.gsp.asp.bean.XMLConnectorAuthorizationResponse 
-		</value> </list> </property> </bean> </constructor-arg> </bean> -->
+
+	<mvc:resources mapping="/images/**"
+		location="${externalFilePath}" />
 
 	<bean id="xmlMessageConverter"
 		class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter">
@@ -45,11 +46,5 @@
 				<ref bean="xmlMessageConverter" />
 			</list>
 		</property>
-	</bean>
-	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<!-- one of the properties available; the maximum file size in bytes -->
-		<!-- set ot 25Mb -->
-		<property name="maxUploadSize" value="26214400" />
 	</bean>
 </beans>
