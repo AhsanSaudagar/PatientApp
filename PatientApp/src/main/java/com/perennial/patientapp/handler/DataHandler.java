@@ -28,7 +28,7 @@ public class DataHandler implements IDataHandler {
     private static ScheduleVO initMedicineSchedule(long patientId, JSONObject jsonObject, PatientAppDAOImpl<IGenericVO> salesDAO) throws ParseException, VCare {
         long medicineId = jsonObject.getLong("medicineId");
         int scheduledQuantity = jsonObject.getInt("scheduledQuantity");
-        DateFormat df = new SimpleDateFormat("2019-01-01 HH:MM:00");
+        DateFormat df = new SimpleDateFormat("2019-01-01 HH:mm:ss");
         Date scheduledTime = df.parse(jsonObject.getString("scheduledTime"));
 
         MedicineVO medicineVo = (MedicineVO) salesDAO.getById(MedicineVO.class, medicineId);

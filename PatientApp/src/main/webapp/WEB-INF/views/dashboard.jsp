@@ -95,13 +95,13 @@
                   type: "POST",
                   headers:{
                       "Content-Type" : 'application/json',
-                      "patientId" : patientId,
+                      "patientId" : 1,
                   },
                   dataType : 'json',
                   url: contextPath+"/patient/MedicineSchedule",
                   data: JSON.stringify(jsonObject),
-                  success: function(data) {
-                      alert("Medicine Added Successfully" );
+                  success: function(response) {
+                      alert(response.Result);
                   }
               });
 
@@ -212,10 +212,10 @@
                         <div>
                             <label for="txtSubSubCategory">Time <span class="requiredField">*</span></label>
                             <select name="time[]" id="time1">
-                              <option value="00:30">00:30</option>
-                              <option value="01:00">01:00</option>
-                              <option value="01:30">01:30</option>
-                              <option value="02:00">02:00</option>
+                              <option value="2019-01-01 00:30:00">00:30</option>
+                              <option value="2019-01-01 01:00:00">01:00</option>
+                              <option value="2019-01-01 01:30:00">01:30</option>
+                              <option value="2019-01-01 02:00:00">02:00</option>
                             </select>
                         </div>
                         <div class="actions">
