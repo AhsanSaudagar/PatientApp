@@ -5,7 +5,6 @@ import com.perennial.patientapp.util.KeyValue;
 import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.List;

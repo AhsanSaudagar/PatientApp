@@ -1,11 +1,10 @@
 package com.perennial.patientapp.vo;
 
-import java.util.List;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "MEDICINE")
-public class MedicineVO implements IGenericVO{
+public class MedicineVO implements IGenericVO {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

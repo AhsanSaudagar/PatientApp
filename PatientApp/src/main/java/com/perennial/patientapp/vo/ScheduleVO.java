@@ -1,11 +1,11 @@
 package com.perennial.patientapp.vo;
 
-import java.util.Date;
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "SCHEDULE")
-public class ScheduleVO implements IGenericVO{
+public class ScheduleVO implements IGenericVO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
