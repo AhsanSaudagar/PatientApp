@@ -48,7 +48,7 @@ public class DataController {
 //        }
 //    }
 
-    @RequestMapping(value = "signUpPatient", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "signUpPatient", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
     public Map<String, Object> SignUpPatient(HttpServletRequest request, @RequestBody SignUpPatient patient) {
         Map<String, Object> response=null;
         try {
