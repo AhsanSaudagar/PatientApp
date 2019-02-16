@@ -39,7 +39,7 @@ public class DataController {
         }
     }
 
-    @RequestMapping(value = "addMedicineScedule", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "addMedicineSchedule", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Map<String, Object> addMedicine(HttpServletRequest request, @RequestBody MedicineVO medicine) {
         try {
