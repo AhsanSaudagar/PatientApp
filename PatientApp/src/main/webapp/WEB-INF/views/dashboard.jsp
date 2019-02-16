@@ -98,7 +98,7 @@
                       "patientId" : patientId,
                   },
                   dataType : 'json',
-                  url: contextPath+"/patient/addMedicineSchedule",
+                  url: contextPath+"/patient/MedicineSchedule",
                   data: JSON.stringify(jsonObject),
                   success: function(data) {
                       alert("Medicine Added Successfully" );
@@ -112,17 +112,16 @@
               $.ajax({
                   type: "GET",
                   url: contextPath+"/patient/getAllMedicines",
-                  success: function(data) {
-                      populateProgramNameList(data,"medicine_name1")
+                  success: function(response) {
+                      populateProgramNameList(response.data ,"medicine_name1")
                   }
               });
           }
 
           function populateProgramNameList(data, id) {
               $("#" + id).empty();
-              $("#" + id).append('<option value="' + "Select a medicine" + '">' + "Select an option" + '</option>');
-              var programList = JSON.parse(data);
-              $.each(programList.programs, function (index, value) {
+              $("#" + id).append('<option >' + "Select a medicine" + '</option>');
+              $.each(data, function (index, value) {
                   $("#" + id).append('<option value="' + value.id + '">' + value.name + '</option>');
               });
           }

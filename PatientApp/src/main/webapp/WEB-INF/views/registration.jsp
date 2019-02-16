@@ -153,7 +153,7 @@
 
   </head>
   <body>
-    <nav class="navbar py-4 navbar-expand-lg ftco_navbar navbar-light bg-light flex-row">
+                                                <nav class="navbar py-4 navbar-expand-lg ftco_navbar navbar-light bg-light flex-row">
         <div class="container">
             <div class="row no-gutters d-flex align-items-start align-items-center px-3 px-md-0">
               <div class="col-lg-2 pr-4 align-items-center">
