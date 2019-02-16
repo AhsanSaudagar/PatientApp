@@ -17,6 +17,7 @@ public class ScheduleVO implements IGenericVO {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private MedicineVO medicineVO;
+
     @Column(name = "EXECUTED_QUANTITY")
     private int executedQuantity;
     @Column(name = "MISSED_QUANTITY")
