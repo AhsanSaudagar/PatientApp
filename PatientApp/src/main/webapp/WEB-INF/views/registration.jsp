@@ -191,7 +191,7 @@
 	          <form action="#" class="appointment-form ftco-animate">
 	    				<div class="d-md-flex">
 		    				<div class="form-group">
-		    					<input type="text" class="form-control" placeholder="Full Name" id="name" required>
+		    					<input type="text" class="form-control" pattern="^[\\p{L} .'-]+$" placeholder="Full Name" id="name" required>
 		    				</div>
               </div>
               <div class="d-md-flex">
@@ -199,12 +199,12 @@
                     <input type="number" class="form-control" placeholder="Age" id="age"required>
                   </div>
                   <div class="form-group ml-md-4">
-                    <input type="text" class="form-control" placeholder="Gender" id="gender" required>
+                    <input type="text" class="form-control" maxlength="1" pattern="[(?:m|f|M|F)]" placeholder="Gender" id="gender" required>
                   </div>
                 </div>
               <div class="d-md-flex">
 		    				<div class="form-group">
-		    					<input type="tel" class="form-control" placeholder="Mobile Number" id="mobileNo" required>
+		    					<input type="tel" class="form-control" maxlength="10" placeholder="Mobile Number" id="mobileNo" required>
 		    				</div>
 		    				<div class="form-group ml-md-4">
 		    					<input type="email" class="form-control" placeholder="Email Id" id="emailAddress" required>
@@ -217,10 +217,10 @@
               </div>
               <div class="d-md-flex">
 		    				<div class="form-group">
-		    					<input type="text" class="form-control" placeholder="Guardian Name" id="guardianName" required>
+		    					<input type="text" class="form-control" pattern="^[\\p{L} .'-]+$" placeholder="Guardian Name" id="guardianName" required>
 		    				</div>
 		    				<div class="form-group ml-md-4">
-		    					<input type="tel" class="form-control" placeholder="Guardian Number"  id="guardianMobileNumber" required>
+		    					<input type="tel" class="form-control" maxlength="10" placeholder="Guardian Number"  id="guardianMobileNumber" required>
 		    				</div>
               </div>
 	    			
