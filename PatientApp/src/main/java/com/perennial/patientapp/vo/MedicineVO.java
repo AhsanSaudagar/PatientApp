@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class MedicineVO implements IGenericVO {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private long id;
 

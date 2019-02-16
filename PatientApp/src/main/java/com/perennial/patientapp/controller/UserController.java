@@ -21,4 +21,22 @@ public class UserController {
         //modelAndView.addObject("title", "Login User | Patient App");
         return modelAndView;
     }
+
+    @RequestMapping(value = "/dashboard")
+    public ModelAndView getDashboard() {
+        ModelAndView modelAndView = new ModelAndView("dashboard");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/logout")
+    public ModelAndView logout() {
+        ModelAndView modelAndView = new ModelAndView("index");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/registration")
+    public ModelAndView registration() {
+        ModelAndView modelAndView = new ModelAndView("registration");
+        return modelAndView;
+    }
 }

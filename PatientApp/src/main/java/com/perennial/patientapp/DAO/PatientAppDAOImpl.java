@@ -3,6 +3,7 @@ package com.perennial.patientapp.DAO;
 import com.perennial.patientapp.exception.VCare;
 import com.perennial.patientapp.util.KeyValue;
 import org.hibernate.*;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -74,6 +75,30 @@ public class PatientAppDAOImpl<S> {
         return s;
     }
 
+    private static Criteria setCriteriaParams(Class cls, List<KeyValue> conditions, List<KeyValue> orderByColumnNames, Integer startLimit, Integer offset, Session session) {
+        Criteria criteria = initCriteria(cls, conditions, session);
+        if (orderByColumnNames != null && !orderByColumnNames.isEmpty()) {
+            prepareOrderBy(orderByColumnNames, criteria);
+        }
+        if (startLimit != null) {
+            criteria.setFirstResult(startLimit);
+        }
+        if (offset != null) {
+            criteria.setMaxResults(offset);
+        }
+        return criteria;
+    }
+
+    private static void prepareOrderBy(List<KeyValue> orderByColumnNames, Criteria criteria) {
+        for (KeyValue order : orderByColumnNames) {
+            if (order.getValue().toString().equalsIgnoreCase("asc")) {
+                criteria.addOrder(Order.asc(order.getKey()));
+            } else {
+                criteria.addOrder(Order.desc(order.getKey()));
+            }
+        }
+    }
+
     public Long save(S s) throws VCare {
         Session session = null;
         Long id = 0l;
@@ -89,6 +114,7 @@ public class PatientAppDAOImpl<S> {
             throw new VCare(he.getMessage());
         } finally {
             if (session != null) {
+                session.flush();
                 session.close();
             }
         }
@@ -109,6 +135,7 @@ public class PatientAppDAOImpl<S> {
             throw new VCare(he.getMessage());
         } finally {
             if (session != null) {
+                session.flush();
                 session.close();
             }
         }
@@ -138,6 +165,7 @@ public class PatientAppDAOImpl<S> {
             throw new VCare(he.getMessage());
         } finally {
             if (session != null) {
+                session.flush();
                 session.close();
             }
         }
@@ -165,6 +193,7 @@ public class PatientAppDAOImpl<S> {
             throw new VCare(he.getMessage());
         } finally {
             if (session != null) {
+                session.flush();
                 session.close();
             }
         }
@@ -185,10 +214,17 @@ public class PatientAppDAOImpl<S> {
             throw new VCare(he.getMessage());
         } finally {
             if (session != null) {
+                session.flush();
                 session.close();
             }
         }
 
+    }
+
+    private void commitSession(Session session) {
+        if (!session.getTransaction().wasCommitted()) {
+            session.getTransaction().commit();
+        }
     }
 
     public void deleteById(Class cls, Serializable id) throws VCare {
@@ -210,6 +246,7 @@ public class PatientAppDAOImpl<S> {
             throw new VCare(he.getMessage());
         } finally {
             if (session != null) {
+                session.flush();
                 session.close();
             }
         }
@@ -230,15 +267,31 @@ public class PatientAppDAOImpl<S> {
             throw new VCare(he.getMessage());
         } finally {
             if (session != null) {
+                session.flush();
                 session.close();
             }
         }
         return s1;
     }
 
-    private void commitSession(Session session) {
-        if (!session.getTransaction().wasCommitted()) {
-            session.getTransaction().commit();
+    public List<S> getObjectList(Class cls, List<KeyValue> conditions, List<KeyValue> orderByColumnNames,
+                                 Integer startLimit, Integer offset) throws VCare {
+        Session session = null;
+        List<S> objectList = null;
+        try {
+            session = sessionFactory.openSession();
+            Criteria criteria = setCriteriaParams(cls, conditions, orderByColumnNames, startLimit, offset, session);
+            objectList = criteria.list();
+
+            commitSession(session);
+        } catch (HibernateException he) {
+            throw new VCare(he.getMessage());
+        } finally {
+            if (session != null) {
+                session.flush();
+                session.close();
+            }
         }
+        return objectList;
     }
 }
