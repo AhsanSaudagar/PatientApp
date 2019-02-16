@@ -16,6 +16,8 @@
 	<mvc:annotation-driven />
 	<context:annotation-config />
 
+	<import resource="classpath:application-context.xml" />
+
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 
 	<bean
