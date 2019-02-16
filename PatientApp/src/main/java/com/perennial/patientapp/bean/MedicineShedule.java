@@ -4,9 +4,9 @@ import java.util.Date;
 
 public class MedicineShedule {
     private String diseaseName;
-    private short scheduledQuantity;
-    private short executedQuantity;
-    private short missedQuantity;
+    private int scheduledQuantity;
+    private int executedQuantity;
+    private int missedQuantity;
     private Date scheduledTime;
 
     public String getDiseaseName() {
@@ -17,27 +17,27 @@ public class MedicineShedule {
         this.diseaseName = diseaseName;
     }
 
-    public short getScheduledQuantity() {
+    public int getScheduledQuantity() {
         return scheduledQuantity;
     }
 
-    public void setScheduledQuantity(short scheduledQuantity) {
+    public void setScheduledQuantity(int scheduledQuantity) {
         this.scheduledQuantity = scheduledQuantity;
     }
 
-    public short getExecutedQuantity() {
+    public int getExecutedQuantity() {
         return executedQuantity;
     }
 
-    public void setExecutedQuantity(short executedQuantity) {
+    public void setExecutedQuantity(int executedQuantity) {
         this.executedQuantity = executedQuantity;
     }
 
-    public short getMissedQuantity() {
+    public int getMissedQuantity() {
         return missedQuantity;
     }
 
-    public void setMissedQuantity(short missedQuantity) {
+    public void setMissedQuantity(int missedQuantity) {
         this.missedQuantity = missedQuantity;
     }
 
