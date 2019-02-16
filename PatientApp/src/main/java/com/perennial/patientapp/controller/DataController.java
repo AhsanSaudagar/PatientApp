@@ -23,7 +23,7 @@ public class DataController {
     private DataHandler dataHandler;
     private MedicineShedule medicineShedule;
 
-    @RequestMapping(value = "/addSchedule", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "addSchedule", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void addMedicineSchedule(@RequestHeader long patientId, @RequestBody MedicineShedule medicineShedule) {
 
     }
@@ -39,18 +39,18 @@ public class DataController {
         }
     }
 
-    @RequestMapping(value = "addMedicineSchedule", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "addMedicine", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Map<String, Object> addMedicine(HttpServletRequest request, @RequestBody MedicineVO medicine) {
         try {
             return ResponseHandler.success(dataHandler.addMedicineSchedule(medicine));
-        } catch (VCare e) {
-            return ResponseHandler.error(e);
+        } catch (VCare vCare) {
+            return ResponseHandler.error(vCare);
         }
+
     }
 
-    @RequestMapping(value = "signUpPatient", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
+    @RequestMapping(value = "signUpPatient", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Map<String, Object> SignUpPatient(HttpServletRequest request, @RequestBody SignUpPatient patient) {
         Map<String, Object> response = null;
         try {
