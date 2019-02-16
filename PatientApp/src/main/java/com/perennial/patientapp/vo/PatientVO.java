@@ -1,11 +1,7 @@
 package com.perennial.patientapp.vo;
 
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 public class PatientVO {
 
@@ -40,6 +36,17 @@ public class PatientVO {
 
 	@Column(name = "IS_ACTIVE")
 	private boolean isActive;
+
+	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	List<ScheduleVO> scheduledMedicines;
+
+	public List<ScheduleVO> getScheduledMedicines() {
+		return scheduledMedicines;
+	}
+
+	public void setScheduledMedicines(List<ScheduleVO> scheduledMedicines) {
+		this.scheduledMedicines = scheduledMedicines;
+	}
 
 	public long getId() {
 		return id;
