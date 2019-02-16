@@ -1,7 +1,7 @@
 package com.perennial.patientapp.vo;
 
-import java.util.List;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "PATIENT")
@@ -40,9 +40,31 @@ public class PatientVO {
 	private boolean isActive;
 
 	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	List<ScheduleVO> scheduledMedicines;
+    private List<ScheduleVO> scheduledMedicines;
 
-	public List<ScheduleVO> getScheduledMedicines() {
+    @Column(name = "AGE")
+    private short age;
+
+    @Column(name = "GENDER")
+    private String gender;
+
+    public short getAge() {
+        return age;
+    }
+
+    public void setAge(short age) {
+        this.age = age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public List<ScheduleVO> getScheduledMedicines() {
 		return scheduledMedicines;
 	}
 
