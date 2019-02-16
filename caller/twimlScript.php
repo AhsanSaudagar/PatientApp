@@ -1,4 +1,6 @@
 <?php
+require __DIR__ . '/config.php';
+
 header('Content-Type: text/xml');
 if(isset($_GET['schedule_id']) && !empty($_GET['schedule_id'])){
     if(isset($_GET['name']) && !empty($_GET['name']))
@@ -19,7 +21,7 @@ if(isset($_GET['schedule_id']) && !empty($_GET['schedule_id'])){
     }
     header('Content-Type: text/xml');
     echo '<Response>
-    <Gather input="speech dtmf" timeout="3" numDigits="1" action="http://52.55.222.177/patient_app/webhook.php?schedule_id='.$_GET["schedule_id"].'" finishOnKey="#">
+    <Gather input="speech dtmf" timeout="3" numDigits="1" action="'.$base_url.'/webhook.php?schedule_id='.$_GET["schedule_id"].'" finishOnKey="#">
     <Say>Hi '.$name.', You have scheduled medicine to be taken '.$time.'. Please press 0 if you need help. Press 1 if you are taking the medicine. Press 2 if you are not taking it. </Say>
     </Gather>
     </Response>';
