@@ -53,7 +53,7 @@ public class DataHandler implements IDataHandler {
         } else {
             return null;
         }
-        return null;
+        return responseData;
     }
 
     public String addMedicineSchedule(String schedule, long patientId) throws VCare {
