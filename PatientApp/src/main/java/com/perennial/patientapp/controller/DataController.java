@@ -27,7 +27,7 @@ public class DataController {
 
     @RequestMapping(value = "getUserDetails", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Map<String, Object> saveKpiData(@RequestParam("id") int id, HttpServletRequest request) {
+    public Map<String, Object> getUserDetails(@RequestParam("id") int id, HttpServletRequest request) {
 
         try {
             return ResponseHandler.success(dataHandler.getUserDetails(id));
@@ -35,5 +35,16 @@ public class DataController {
             return ResponseHandler.error(e);
         }
     }
+
+//    @RequestMapping(value = "addMedicine", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+//    @ResponseBody
+//    public Map<String, Object> addMedicine( HttpServletRequest request,@RequestBody String medicineJson) {
+//        try {
+//            return ResponseHandler.success(dataHandler.addMedicineRecord(id));
+//        } catch (VCare | IOException e) {
+//            return ResponseHandler.error(e);
+//        }
+//    }
+
 
 }
