@@ -3,18 +3,21 @@ package com.perennial.patientapp.handler;
 import com.perennial.patientapp.DAO.PatientAppDAOImpl;
 import com.perennial.patientapp.bean.SignUpPatient;
 import com.perennial.patientapp.exception.VCare;
+import com.perennial.patientapp.vo.IGenericVO;
 import com.perennial.patientapp.vo.PatientVO;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class DataHandler implements IDataHandler {
 
     @Autowired
-    private PatientAppDAOImpl salesDAO;
+    private PatientAppDAOImpl<IGenericVO> salesDAO;
 
 
     public String getUserDetails(int id) throws IOException, VCare {
@@ -37,10 +40,12 @@ public class DataHandler implements IDataHandler {
             vo.setGuardianMobileNumber(patient.getGuardianMobileNumber());
             vo.setAddress(patient.getAddress());
             vo.setAge(patient.getAge());
-
+            long id =salesDAO.save(vo);
+            responseData.put("id",id);
+            responseData.put("message","added successfully");
         }else{
             return null;
         }
-        return null;
+        return responseData;
     }
 }

@@ -5,7 +5,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "PATIENT")
-public class PatientVO {
+public class PatientVO implements IGenericVO {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

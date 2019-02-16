@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "SCHEDULE")
-public class ScheduleVO {
+public class ScheduleVO implements IGenericVO{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

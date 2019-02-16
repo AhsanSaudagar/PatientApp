@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "MEDICINE")
-public class MedicineVO {
+public class MedicineVO implements IGenericVO{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

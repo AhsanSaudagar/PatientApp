@@ -20,16 +20,16 @@ public class DataController {
 
     @Autowired
     private DataHandler dataHandler;
+
     private MedicineShedule medicineShedule;
 
-    @RequestMapping(value = "/addSchedule", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "addSchedule", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
     public void addMedicineSchedule(@RequestHeader long patientId, @RequestBody MedicineShedule medicineShedule){
 
     }
 
 
     @RequestMapping(value = "getUserDetails", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
     public Map<String, Object> getUserDetails(@RequestParam("id") int id, HttpServletRequest request) {
         try {
             return ResponseHandler.success(dataHandler.getUserDetails(id));
@@ -48,13 +48,12 @@ public class DataController {
 //        }
 //    }
 
-    @RequestMapping(value = "signUpPatient", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
+    @RequestMapping(value = "signUpPatient", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Map<String, Object> SignUpPatient(HttpServletRequest request, @RequestBody SignUpPatient patient) {
         Map<String, Object> response=null;
         try {
             response = dataHandler.signUpPatient(patient);
-        } catch (VCare | IOException e) {
+        } catch (VCare e) {
             return ResponseHandler.error(e);
         }
         return ResponseHandler.success(response);
