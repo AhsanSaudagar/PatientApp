@@ -1,12 +1,15 @@
 package com.perennial.patientapp.handler;
 
 import com.perennial.patientapp.DAO.PatientAppDAOImpl;
+import com.perennial.patientapp.bean.SignUpPatient;
 import com.perennial.patientapp.exception.VCare;
 import com.perennial.patientapp.vo.PatientVO;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DataHandler implements IDataHandler {
 
@@ -20,5 +23,24 @@ public class DataHandler implements IDataHandler {
         ObjectMapper mapper = new ObjectMapper();
         String result = mapper.writeValueAsString(patient);
         return result;
+    }
+
+    @Override
+    public Map<String, Object> signUpPatient(SignUpPatient patient) throws VCare {
+        Map<String, Object> responseData= new HashMap<>();
+        if(patient!=null){
+            PatientVO vo = new PatientVO();
+            vo.setName(patient.getName());
+            vo.setEmailAddress(patient.getEmailAddress());
+            vo.setMobileNo(patient.getMobileNo());
+            vo.setGuardianName(patient.getGuardianName());
+            vo.setGuardianMobileNumber(patient.getGuardianMobileNumber());
+            vo.setAddress(patient.getAddress());
+            vo.setAge(patient.getAge());
+
+        }else{
+            return null;
+        }
+        return null;
     }
 }

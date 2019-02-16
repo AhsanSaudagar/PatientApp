@@ -1,6 +1,7 @@
 package com.perennial.patientapp.controller;
 
 import com.perennial.patientapp.bean.MedicineShedule;
+import com.perennial.patientapp.bean.SignUpPatient;
 import com.perennial.patientapp.exception.VCare;
 import com.perennial.patientapp.handler.DataHandler;
 import com.perennial.patientapp.util.ResponseHandler;
@@ -47,5 +48,16 @@ public class DataController {
 //        }
 //    }
 
+    @RequestMapping(value = "signUpPatient", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Map<String, Object> SignUpPatient(HttpServletRequest request, @RequestBody SignUpPatient patient) {
+        Map<String, Object> response=null;
+        try {
+            response = dataHandler.signUpPatient(patient);
+        } catch (VCare | IOException e) {
+            return ResponseHandler.error(e);
+        }
+        return ResponseHandler.success(response);
+    }
 
 }
