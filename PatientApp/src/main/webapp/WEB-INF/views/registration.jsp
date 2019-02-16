@@ -60,19 +60,39 @@
               // [START createwithemail]
               firebase.auth().createUserWithEmailAndPassword(email, password).then(function (value) {
                   var contextPath = $("#contextPath").val();
-                  $.post(contextPath+"/patientApp/signUp",
-                      {
-                          name : document.getElementById('name').value,
-                          emailAddress : document.getElementById('emailAddress').value,
-                          mobileNo : document.getElementById('mobileNo').value,
-                          gender : document.getElementById('gender').value,
-                          age : document.getElementById('age').value,
-                          guardianName : document.getElementById('guardianName').value,
-                          guardianMobileNumber : document.getElementById('guardianMobileNumber').value
+                  $.ajax({
+                      type: "POST",
+                      headers:{
+                          "Content-Type" : 'application/json'
                       },
-                      function(data, status){
-                          alert("Data: " + data + "\nStatus: " + status);
-                      });
+                      dataType : 'json',
+                      url: contextPath+"/patient/signUpPatient",
+                      data: JSON.stringify({
+                          'name' : document.getElementById('name').value,
+                          'emailAddress' : document.getElementById('emailAddress').value,
+                          'mobileNo' : document.getElementById('mobileNo').value,
+                          'gender' : document.getElementById('gender').value,
+                          'age': document.getElementById('age').value,
+                          'guardianName' : document.getElementById('guardianName').value,
+                          'guardianMobileNumber' : document.getElementById('guardianMobileNumber').value
+                      }),
+                      success: function(data) {
+                          alert("Registered Successfully" );
+                      }
+                  });
+                  // $.post(contextPath+"/patient/signUpPatient",
+                  //     {
+                  //         'name' : document.getElementById('name').value,
+                  //         'emailAddress' : document.getElementById('emailAddress').value,
+                  //         'mobileNo' : document.getElementById('mobileNo').value,
+                  //         'gender' : document.getElementById('gender').value,
+                  //         'age': document.getElementById('age').value,
+                  //         'guardianName' : document.getElementById('guardianName').value,
+                  //         'guardianMobileNumber' : document.getElementById('guardianMobileNumber').value
+                  //     },
+                  //     function(data, status){
+                  //         alert("Data: " + data + "\nStatus: " + status);
+                  //     });
               }).catch(function(error) {
                   // Handle Errors here.
                   var errorCode = error.code;

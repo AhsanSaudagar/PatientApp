@@ -78,7 +78,56 @@
 
           window.onload = function() {
               initApp();
+              getMedicineList()
           };
+          $(document).on("click", "#save", function() {
+              var jsonObject ={};
+              var medicine = $("#medicine_name1").children("option:selected"). val();
+              var qty = $("#qty1").children("option:selected"). val();
+              var time = $("#time1").children("option:selected"). val();
+              var patientId;
+              jsonObject["medicineId"] = medicine;
+              jsonObject["scheduledQuantity"] = qty;
+              jsonObject["scheduledTime"] = time;
+
+              var contextPath = $("#contextPath").val();
+              $.ajax({
+                  type: "POST",
+                  headers:{
+                      "Content-Type" : 'application/json',
+                      "patientId" : patientId,
+                  },
+                  dataType : 'json',
+                  url: contextPath+"/patient/addMedicineSchedule",
+                  data: JSON.stringify(jsonObject),
+                  success: function(data) {
+                      alert("Medicine Added Successfully" );
+                  }
+              });
+
+          });
+
+          function getMedicineList() {
+              var contextPath = $("#contextPath").val();
+              $.ajax({
+                  type: "GET",
+                  url: contextPath+"/patient/getAllMedicines",
+                  success: function(data) {
+                      populateProgramNameList(data,"medicine_name1")
+                  }
+              });
+          }
+
+          function populateProgramNameList(data, id) {
+              $("#" + id).empty();
+              $("#" + id).append('<option value="' + "Select a medicine" + '">' + "Select an option" + '</option>');
+              var programList = JSON.parse(data);
+              $.each(programList.programs, function (index, value) {
+                  $("#" + id).append('<option value="' + value.id + '">' + value.name + '</option>');
+              });
+          }
+
+
       </script>
   </head>
   <body>
@@ -178,8 +227,8 @@
                     </div>
          
         </div>
-        <input type="Submit" class="clone" value="Save"></input> 
-
+        <%--<input type="Submit" class="clone" value="Save"></input>--%>
+        <button class="btn btn-secondary py-3 px-4" id="save" name="save">Save</button>
     </form>
     	
     	</div>
