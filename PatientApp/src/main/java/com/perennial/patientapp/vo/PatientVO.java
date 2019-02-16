@@ -3,6 +3,8 @@ package com.perennial.patientapp.vo;
 import java.util.List;
 import javax.persistence.*;
 
+@Entity
+@Table(name = "PATIENT")
 public class PatientVO {
 
 	@Id
@@ -20,9 +22,9 @@ public class PatientVO {
 	@Column(name = "EMAIL_ADDRESS")
 	private String emailAddress;
 
-	@OneToMany
-	@Column(name = "DISEASE_ID")
-	private List<String> diseases;
+	@OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="DISEASE_ID")
+	private List<DiseaseVO> diseases;
 
 	@Column(name = "GUARDIAN_NAME")
 	private String guardianName;
@@ -80,11 +82,11 @@ public class PatientVO {
 		this.emailAddress = emailAddress;
 	}
 
-	public List<String> getDiseases() {
+	public List<DiseaseVO> getDiseases() {
 		return diseases;
 	}
 
-	public void setDiseases(List<String> diseases) {
+	public void setDiseases(List<DiseaseVO> diseases) {
 		this.diseases = diseases;
 	}
 

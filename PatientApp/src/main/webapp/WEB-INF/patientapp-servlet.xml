@@ -46,4 +46,9 @@
 			</list>
 		</property>
 	</bean>
+
+
+    <bean id="salesDAO" class="com.perennial.patientapp.DAO.PatientAppDAOImpl">
+        <constructor-arg ref="hibernateSessionFactory"/>
+    </bean>
 </beans>

@@ -40,7 +40,7 @@
 				<prop key="hibernate.connection.password">${password}</prop>
 				<prop key="hibernate.format_sql">false</prop>
 				<prop key="hibernate.show_sql">false</prop>
-				<prop key="hibernate.hbm2ddl.auto">validate</prop>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
 				<prop key="hibernate.jdbc.batch_size">50</prop>
 				<prop key="hibernate.current_session_context_class">thread</prop>
 				<prop key="hibernate.cache.use_second_level_cache">false</prop>
@@ -58,10 +58,10 @@
 				<prop key="hibernate.c3p0.breakOnAcquireFailure">true</prop>
 				<prop key="hibernate.c3p0.preferredTestQuery">SELECT 1</prop>
 				<prop key="hibernate.connection.provider_class">org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider</prop>
-				<!-- <prop key="net.sf.cache.ehcache.configurationResourceName">/ehcache-failsafe.xml</prop> -->
 			</props>
 		</property>
 		<property name="packagesToScan" value="com.perennial.patientapp.vo" />
+		<property name="annotatedPackages" value="com.perennial.patientapp.vo" />
 	</bean>
 
 	<!-- MUST have transaction manager, using aop and aspects -->

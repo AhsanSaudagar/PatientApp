@@ -1,16 +1,10 @@
 package com.perennial.patientapp.vo;
 
 import java.util.Date;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "SCHEDULE")
 public class ScheduleVO {
 
     @Id
@@ -19,7 +13,6 @@ public class ScheduleVO {
     private long id;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @Column(name = "MEDICINE_ID")
     private MedicineVO medicineVO;
 
     @Column(name = "SCHEDULED_QUANTITY")
@@ -32,7 +25,7 @@ public class ScheduleVO {
     private short missedQuantity;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @Column(name = "PATIENT_ID")
+    @JoinColumn(name = "PATIENT_ID")
     private PatientVO patient;
 
     @Column(name = "SCHEDULED_TIME")
