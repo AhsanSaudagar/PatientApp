@@ -1,9 +1,11 @@
 package com.perennial.patientapp.vo;
 
-import java.util.List;
 import javax.persistence.*;
+import java.util.List;
 
-public class PatientVO {
+@Entity
+@Table(name = "PATIENT")
+public class PatientVO implements IGenericVO {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,9 +22,9 @@ public class PatientVO {
 	@Column(name = "EMAIL_ADDRESS")
 	private String emailAddress;
 
-	@OneToMany
-	@Column(name = "DISEASE_ID")
-	private List<String> diseases;
+	@OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="DISEASE_ID")
+	private List<DiseaseVO> diseases;
 
 	@Column(name = "GUARDIAN_NAME")
 	private String guardianName;
@@ -38,9 +40,31 @@ public class PatientVO {
 	private boolean isActive;
 
 	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	List<ScheduleVO> scheduledMedicines;
+    private List<ScheduleVO> scheduledMedicines;
 
-	public List<ScheduleVO> getScheduledMedicines() {
+    @Column(name = "AGE")
+    private short age;
+
+    @Column(name = "GENDER")
+    private String gender;
+
+    public short getAge() {
+        return age;
+    }
+
+    public void setAge(short age) {
+        this.age = age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public List<ScheduleVO> getScheduledMedicines() {
 		return scheduledMedicines;
 	}
 
@@ -80,11 +104,11 @@ public class PatientVO {
 		this.emailAddress = emailAddress;
 	}
 
-	public List<String> getDiseases() {
+	public List<DiseaseVO> getDiseases() {
 		return diseases;
 	}
 
-	public void setDiseases(List<String> diseases) {
+	public void setDiseases(List<DiseaseVO> diseases) {
 		this.diseases = diseases;
 	}
 

@@ -1,17 +1,14 @@
 package com.perennial.patientapp.vo;
 
+import javax.persistence.*;
 import java.util.Date;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-public class ScheduleVO {
+@Entity
+@Table(name = "SCHEDULE")
+public class ScheduleVO implements IGenericVO {
+
+    @Column(name = "SCHEDULED_QUANTITY")
+    private int scheduledQuantity;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,20 +16,23 @@ public class ScheduleVO {
     private long id;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @Column(name = "MEDICINE_ID")
     private MedicineVO medicineVO;
-
-    @Column(name = "SCHEDULED_QUANTITY")
-    private short scheduledQuantity;
-
     @Column(name = "EXECUTED_QUANTITY")
-    private short executedQuantity;
-
+    private int executedQuantity;
     @Column(name = "MISSED_QUANTITY")
-    private short missedQuantity;
+    private int missedQuantity;
+
+    public ScheduleVO(MedicineVO medicineVO, int scheduledQuantity, int executedQuantity, int missedQuantity, PatientVO patient, Date scheduledTime) {
+        this.medicineVO = medicineVO;
+        this.scheduledQuantity = scheduledQuantity;
+        this.executedQuantity = executedQuantity;
+        this.missedQuantity = missedQuantity;
+        this.patient = patient;
+        this.scheduledTime = scheduledTime;
+    }
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @Column(name = "PATIENT_ID")
+    @JoinColumn(name = "PATIENT_ID")
     private PatientVO patient;
 
     @Column(name = "SCHEDULED_TIME")
@@ -55,27 +55,27 @@ public class ScheduleVO {
         this.medicineVO = medicineVO;
     }
 
-    public short getScheduledQuantity() {
+    public int getScheduledQuantity() {
         return scheduledQuantity;
     }
 
-    public void setScheduledQuantity(short scheduledQuantity) {
+    public void setScheduledQuantity(int scheduledQuantity) {
         this.scheduledQuantity = scheduledQuantity;
     }
 
-    public short getExecutedQuantity() {
+    public int getExecutedQuantity() {
         return executedQuantity;
     }
 
-    public void setExecutedQuantity(short executedQuantity) {
+    public void setExecutedQuantity(int executedQuantity) {
         this.executedQuantity = executedQuantity;
     }
 
-    public short getMissedQuantity() {
+    public int getMissedQuantity() {
         return missedQuantity;
     }
 
-    public void setMissedQuantity(short missedQuantity) {
+    public void setMissedQuantity(int missedQuantity) {
         this.missedQuantity = missedQuantity;
     }
 
