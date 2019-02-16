@@ -63,7 +63,7 @@ public class DataHandler implements IDataHandler {
         try {
             long medicineId = jsonObject.getLong("medicineId");
             int scheduledQuantity = jsonObject.getInt("scheduledQuantity");
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd 00:00:00");
+            DateFormat df = new SimpleDateFormat("2019-01-01 HH:MM:00");
             Date scheduledTime = df.parse(jsonObject.getString("scheduledTime"));
 
             MedicineVO medicineVo = (MedicineVO) salesDAO.getById(MedicineVO.class, medicineId);
