@@ -181,7 +181,7 @@
                 <form action="#" class="appointment-form ftco-animate">
                     <div class="d-md-flex">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="email" id="email" name="email" required>
+                            <input type="email" class="form-control" placeholder="email" id="email" name="email" required>
                         </div>
                         <div class="form-group ml-md-4">
 
