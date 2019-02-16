@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd 
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd 
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+
+    <mvc:annotation-driven />
+
+	<tx:annotation-driven />
+
+	<bean id="dbMailProperties"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:db.properties</value>
+				<value>classpath:app.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- MySQL data source -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="${host}/${database}?autoReconnect=true" />
+		<property name="username" value="${username}" />
+		<property name="password" value="${password}" />
+		<property name="accessToUnderlyingConnectionAllowed" value="true" />
+		<!-- pool size -->
+		<property name="initialSize" value="20" />
+		<property name="minIdle" value="0"></property>
+		<property name="maxIdle" value="18"></property>
+		<!-- Validation Query:The SQL query that will be used to validate connections 
+			from this pool before returning them to the caller. -->
+		<property name="validationQuery" value="SELECT 1"></property>
+	</bean>
+
+	<!-- Hibernate session factory -->
+	<bean id="hibernateSessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
+				<prop key="hibernate.connection.url">${host}/${database}?autoReconnect=true</prop>
+				<prop key="hibernate.connection.verifyServerCertificate">true</prop>
+				<prop key="hibernate.connection.useSSL">true</prop>
+				<prop key="hibernate.connection.requireSSL">false</prop>
+				<prop key="hibernate.connection.username">${username}</prop>
+				<prop key="hibernate.connection.password">${password}</prop>
+				<prop key="hibernate.format_sql">false</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.hbm2ddl.auto">validate</prop>
+				<prop key="hibernate.jdbc.batch_size">50</prop>
+				<prop key="hibernate.current_session_context_class">thread</prop>
+				<prop key="hibernate.cache.use_second_level_cache">false</prop>
+				<prop key="hibernate.cache.use_query_cache">false</prop>
+				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory
+				</prop>
+				<prop key="hibernate.connection.isolation">2</prop>
+				<prop key="hibernate.c3p0.min_size">5</prop>
+				<prop key="hibernate.c3p0.max_size">50</prop>
+				<prop key="hibernate.c3p0.timeout">3300</prop>
+				<prop key="hibernate.c3p0.max_statements">50</prop>
+				<prop key="hibernate.c3p0.idle_test_period">3000</prop>
+				<prop key="hibernate.c3p0.validate">true</prop>
+				<prop key="hibernate.c3p0.acquireRetryAttempts">1</prop>
+				<prop key="hibernate.c3p0.breakOnAcquireFailure">true</prop>
+				<prop key="hibernate.c3p0.preferredTestQuery">SELECT 1</prop>
+				<prop key="hibernate.connection.provider_class">org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider</prop>
+				<!-- <prop key="net.sf.cache.ehcache.configurationResourceName">/ehcache-failsafe.xml</prop> -->
+			</props>
+		</property>
+		<property name="packagesToScan" value="com.perennial.patientapp.vo" />
+	</bean>
+
+	<!-- MUST have transaction manager, using aop and aspects -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="hibernateSessionFactory"></property>
+	</bean>
+</beans>
