@@ -3,6 +3,7 @@ package com.perennial.patientapp.controller;
 import com.perennial.patientapp.exception.VCare;
 import com.perennial.patientapp.handler.DataHandler;
 import com.perennial.patientapp.util.ResponseHandler;
+import com.perennial.patientapp.vo.MedicineVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -36,15 +37,15 @@ public class DataController {
         }
     }
 
-//    @RequestMapping(value = "addMedicine", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-//    @ResponseBody
-//    public Map<String, Object> addMedicine( HttpServletRequest request,@RequestBody String medicineJson) {
-//        try {
-//            return ResponseHandler.success(dataHandler.addMedicineRecord(id));
-//        } catch (VCare | IOException e) {
-//            return ResponseHandler.error(e);
-//        }
-//    }
+    @RequestMapping(value = "addMedicineScedule", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Map<String, Object> addMedicine(HttpServletRequest request, @RequestBody MedicineVO medicine) {
+        try {
+            return ResponseHandler.success(dataHandler.addMedicineSchedule(medicine));
+        } catch (VCare e) {
+            return ResponseHandler.error(e);
+        }
+    }
 
 
 }
