@@ -6,8 +6,8 @@ Generally, caretakers call to see if the patient needs any help or is taking med
 
 <a href="http://52.55.222.177:8082/PatientApp/patientApp/" target="_blank">Demo link</a>
 
-User: 
-Password:
+User: ankit.kumbhar@perennialsys.com
+Password: Admin@123
 
 
 <h1>Features</h1>
@@ -23,7 +23,7 @@ Password:
 
   <br>
   <br>
-	1 - Reports.
+	1 - Administration portal, Reports to patients.
   <br>
 	2 - Call to the guardian or relatives if any help is needed.
   <br>
@@ -34,5 +34,10 @@ Password:
 	5 - Tone analysis.
   <br>
 	6 - Sending SMS.
-	
+  <br>
+	7 - Mobile app.
   <hr>
+
+<h1>Known bugs</h1>
+  <br>
+	1 - View and Edit schedule stopped working.
