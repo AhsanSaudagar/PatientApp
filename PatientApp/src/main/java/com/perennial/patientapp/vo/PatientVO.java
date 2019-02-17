@@ -1,24 +1,25 @@
 package com.perennial.patientapp.vo;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "PATIENT")
+@Table(name = "PATIENTS")
 public class PatientVO implements IGenericVO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "PATIENT_ID")
     private long id;
 
-    @Column(name = "name")
+    @Column(name = "NAME")
     private String name;
 
-    @Column(name = "MOBILE_NUMBER")
+    @Column(name = "MOBILE")
     private String mobileNo;
 
-    @Column(name = "EMAIL_ADDRESS")
+    @Column(name = "EMAIL")
     private String emailAddress;
 
     @OneToMany(cascade = CascadeType.ALL)
@@ -28,12 +29,16 @@ public class PatientVO implements IGenericVO {
     @Column(name = "GUARDIAN_NAME")
     private String guardianName;
 
-    @Column(name = "GUARDIAN_MOBILE_NUMBER")
+    @Column(name = "GUARDIAN_NO")
     private String guardianMobileNumber;
 
 
     @Column(name = "ADDRESS")
     private String address;
+
+    @Column(name = "created_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
 
     @Column(name = "IS_ACTIVE")
     private boolean isActive;

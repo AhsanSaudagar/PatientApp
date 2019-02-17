@@ -34,9 +34,9 @@ public class DataHandler implements IDataHandler {
 
         MedicineVO medicineVo = (MedicineVO) salesDAO.getById(MedicineVO.class, medicineId);
         List<KeyValue> conditions = new ArrayList<>();
-        conditions.add(new KeyValue("pid", patientId));
+        conditions.add(new KeyValue("pid",patientId));
         PatientVO patientVO = (PatientVO) salesDAO.getByConditions(PatientVO.class, conditions);
-        return new ScheduleVO(medicineVo, scheduledQuantity, 0, 0, patientVO, scheduledTime);
+        return new ScheduleVO(medicineVo, scheduledQuantity, patientVO, scheduledTime);
     }
 
     public String getUserDetails(int id) throws IOException, VCare {

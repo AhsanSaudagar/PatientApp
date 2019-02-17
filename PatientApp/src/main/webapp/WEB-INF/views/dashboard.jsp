@@ -84,17 +84,22 @@
           };
           $(document).on("click", "#save", function() {
               var jsonObject ={};
-              var medicine = $("#medicine_name1").children("option:selected"). val();
-              var qty = $("#qty1").children("option:selected"). val();
-              var time = $("#time1").children("option:selected"). val();
+              var jsonArray =[];
               var patientId;
-              if(medicine=='Select a medicine'){
-                  alert("please select medicine");
-                  return;
+              for (i = 1; i < cloneIndex; i++) {
+                  var medicine = $("#medicine_name"+i).children("option:selected"). val();
+                  var qty = $("#qty"+i).children("option:selected"). val();
+                  var time = $("#time"+i).children("option:selected"). val();
+                  if(medicine=='Select a medicine'){
+                      alert("please select medicine");
+                      return;
+                  }
+                  jsonObject["medicineId"] = medicine;
+                  jsonObject["scheduledQuantity"] = qty;
+                  jsonObject["scheduledTime"] = time;
+                  jsonArray.push(jsonObject);
               }
-              jsonObject["medicineId"] = medicine;
-              jsonObject["scheduledQuantity"] = qty;
-              jsonObject["scheduledTime"] = time;
+
 
               var contextPath = $("#contextPath").val();
               $.ajax({
@@ -105,10 +110,15 @@
                   },
                   dataType : 'json',
                   url: contextPath+"/patient/MedicineSchedule",
-                  data: JSON.stringify(jsonObject),
+                  data: JSON.stringify(jsonArray),
                   success: function(response) {
-                      $("#removeSchedule").attr('scheduleId',response.ScheduleId);
+                      console.log(response);
+                      sessionStorage.scheduleId = response.data.ScheduleId;
                       alert(response.Result);
+
+                  },
+                  error : function (error) {
+                     console.log(error);
                   }
               });
 
@@ -116,7 +126,7 @@
 
           $(document).on("click", "#removeSchedule", function() {
               var jsonObject ={};
-              var scheduleId = $(this).attr('scheduleId');
+              var scheduleId = sessionStorage.scheduleId;
               var contextPath = $("#contextPath").val();
               if(scheduleId ==undefined || scheduleId==null || scheduleId==0){
                   alert('schedule not exist');
@@ -166,7 +176,7 @@
     	<div class="container">
     		<div class="row no-gutters d-flex align-items-start align-items-center px-3 px-md-0">
     			<div class="col-lg-2 pr-4 align-items-center">
-		    		<a class="navbar-brand" href="index.html">V<span>care</span></a>
+		    		<a class="navbar-brand" href="#">V<span>care</span></a>
 	    		</div>
                 <input type="hidden" id="contextPath" value="${pageContext.request.contextPath}">
 	    		<div class="col-lg-10 d-none d-md-block">
@@ -196,10 +206,10 @@
 	       <p  id="logout" class="button-custom order-lg-last mb-0 btn btn-secondary py-2 px-3">Logout</p>
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav mr-auto">
-	        	<li class="nav-item"><a href="index.html" class="nav-link pl-0">Home</a></li>
-	        	<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+	        	<li class="nav-item"><a href="#" class="nav-link pl-0">Home</a></li>
+	        	<li class="nav-item"><a href="#" class="nav-link">About</a></li>
 
-	        	   <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+	        	   <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
 	        </ul>
 	      </div>
 	    </div>
@@ -439,7 +449,7 @@
 
         
     var regex = /^(.+?)(\d+)$/i;
-var cloneIndex = $(".clonedInput").length;
+var cloneIndex = $(".clonedInput").length +1;
 
 function clone(){
     $(this).parents(".clonedInput").clone()
