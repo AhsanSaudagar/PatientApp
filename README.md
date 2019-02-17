@@ -16,6 +16,7 @@ Password:
 - Maintain medicine schedule 
 - Ability to call
 - Take feedback 
+- Text-to-speech 
 
 <h2>Next</h2>
 
@@ -31,4 +32,7 @@ Password:
 	4 - Get inputs in voice
   <br>
 	5 - Tone analysis.
+  <br>
+	6 - Sending SMS.
+	
   <hr>
