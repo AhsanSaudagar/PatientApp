@@ -75,7 +75,7 @@
                           'age': document.getElementById('age').value,
                           'guardianName' : document.getElementById('guardianName').value,
                           'guardianMobileNumber' : document.getElementById('guardianMobileNumber').value,
-                          'pid' : value.uid
+                          'pid' : value.user.uid
                       }),
                       success: function(data) {
                           alert("Registered Successfully" );

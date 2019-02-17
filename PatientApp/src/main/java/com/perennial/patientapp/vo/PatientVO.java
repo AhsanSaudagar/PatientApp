@@ -52,6 +52,9 @@ public class PatientVO implements IGenericVO {
     @Column(name = "GENDER")
     private String gender;
 
+    @Column(name = "pid")
+    private String pid;
+
     public short getAge() {
         return age;
     }
@@ -139,5 +142,13 @@ public class PatientVO implements IGenericVO {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
     }
 }
