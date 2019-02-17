@@ -51,9 +51,11 @@ public class PatientScheduler {
                     long scheduleId = ((BigInteger) arr[1]).intValue();
                     PatientVO patient = (PatientVO) patientAppDAO.getById(PatientVO.class, patientId);
                     String time = String.valueOf(hour)+":"+String.valueOf(minit+1)+ampm;
+                    TrackerVO trackerVO = new TrackerVO(scheduleId,new Date());
+                    long trackId = patientAppDAO.save(trackerVO);
                     Map<String,String> param = new HashMap<>();
                     param.put("name",patient.getName());
-                    param.put("schedule_id",String.valueOf(scheduleId));
+                    param.put("tracker_id",String.valueOf(trackId));
                     param.put("time",time);
                     param.put("to_number","+91"+patient.getMobileNo());
                     String link ="http://52.55.222.177/patient_app/makeCall.php";
@@ -64,8 +66,6 @@ public class PatientScheduler {
                     URI uri = uriBuilder.build();
                     HttpRequestBase request = new HttpGet(uri);
                     HttpClientPool.getClient().execute(request);
-                    TrackerVO trackerVO = new TrackerVO(scheduleId,new Date());
-                    patientAppDAO.save(trackerVO);
                     //PhoneCall phoneCall = new PhoneCall();
                     //phoneCall.giveACall(patient.getName(),time,scheduleId,patient.getMobileNo(),patient.getGuardianMobileNumber());
                 }
