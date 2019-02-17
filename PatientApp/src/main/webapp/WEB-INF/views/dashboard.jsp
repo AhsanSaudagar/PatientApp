@@ -67,6 +67,8 @@
                       var contextPath = $("#contextPath").val();
                       window.location = contextPath + '/patientApp/';
                       // [END_EXCLUDE]
+                  }else{
+                      sessionStorage.pid = user.uid;
                   }
                   // [START_EXCLUDE silent]
                   // document.getElementById('quickstart-sign-in').disabled = false;
@@ -95,7 +97,7 @@
                   type: "POST",
                   headers:{
                       "Content-Type" : 'application/json',
-                      "patientId" : 1,
+                      "patientId" : sessionStorage.pid,
                   },
                   dataType : 'json',
                   url: contextPath+"/patient/MedicineSchedule",
@@ -212,10 +214,56 @@
                         <div>
                             <label for="txtSubSubCategory">Time <span class="requiredField">*</span></label>
                             <select name="time[]" id="time1">
+                              <option value="2019-01-01 00:00:00">00:00</option>
                               <option value="2019-01-01 00:30:00">00:30</option>
                               <option value="2019-01-01 01:00:00">01:00</option>
                               <option value="2019-01-01 01:30:00">01:30</option>
                               <option value="2019-01-01 02:00:00">02:00</option>
+                              <option value="2019-01-01 02:30:00">02:30</option>
+                              <option value="2019-01-01 03:00:00">03:00</option>
+                                <option value="2019-01-01 03:30:00">03:30</option>
+                                <option value="2019-01-01 04:00:00">04:00</option>
+                              <option value="2019-01-01 04:30:00">04:30</option>
+                              <option value="2019-01-01 05:00:00">05:00</option>
+                                <option value="2019-01-01 05:30:00">05:30</option>
+                                <option value="2019-01-01 06:00:00">06:00</option>
+                              <option value="2019-01-01 06:30:00">06:30</option>
+                              <option value="2019-01-01 07:00:00">07:00</option>
+                                <option value="2019-01-01 07:30:00">07:30</option>
+                                <option value="2019-01-01 08:00:00">08:00</option>
+                              <option value="2019-01-01 08:30:00">08:30</option>
+                              <option value="2019-01-01 09:00:00">09:00</option>
+                                <option value="2019-01-01 09:30:00">09:30</option>
+                                <option value="2019-01-01 10:00:00">10:00</option>
+                              <option value="2019-01-01 10:30:00">10:30</option>
+                              <option value="2019-01-01 11:00:00">11:00</option>
+                              <option value="2019-01-01 11:30:00">11:30</option>
+                              <option value="2019-01-01 12:00:00">12:00</option>
+                              <option value="2019-01-01 12:30:00">12:30</option>
+                              <option value="2019-01-01 13:00:00">13:00</option>
+                              <option value="2019-01-01 13:30:00">13:30</option>
+                              <option value="2019-01-01 14:00:00">14:00</option>
+                              <option value="2019-01-01 14:30:00">14:30</option>
+                              <option value="2019-01-01 15:00:00">15:00</option>
+                              <option value="2019-01-01 15:30:00">15:30</option>
+                              <option value="2019-01-01 16:00:00">16:00</option>
+                              <option value="2019-01-01 16:30:00">16:30</option>
+                              <option value="2019-01-01 17:00:00">17:00</option>
+                              <option value="2019-01-01 17:30:00">17:30</option>
+                              <option value="2019-01-01 18:00:00">18:00</option>
+                              <option value="2019-01-01 18:30:00">18:30</option>
+                              <option value="2019-01-01 19:00:00">19:00</option>
+                              <option value="2019-01-01 19:30:00">19:30</option>
+                              <option value="2019-01-01 20:00:00">20:00</option>
+                              <option value="2019-01-01 20:30:00">20:30</option>
+                              <option value="2019-01-01 21:00:00">21:00</option>
+                              <option value="2019-01-01 21:30:00">21:30</option>
+                              <option value="2019-01-01 22:00:00">22:00</option>
+                              <option value="2019-01-01 22:30:00">22:30</option>
+                              <option value="2019-01-01 23:00:00">23:00</option>
+                              <option value="2019-01-01 23:30:00">23:30</option>
+
+
                             </select>
                         </div>
                         <div class="actions">
