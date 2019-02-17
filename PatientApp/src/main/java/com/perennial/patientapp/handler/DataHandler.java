@@ -9,6 +9,7 @@ import com.perennial.patientapp.vo.MedicineVO;
 import com.perennial.patientapp.vo.PatientVO;
 import com.perennial.patientapp.vo.ScheduleVO;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,7 +34,7 @@ public class DataHandler implements IDataHandler {
 
         MedicineVO medicineVo = (MedicineVO) salesDAO.getById(MedicineVO.class, medicineId);
         List<KeyValue> conditions = new ArrayList<>();
-        conditions.add(new KeyValue("pid",patientId));
+        conditions.add(new KeyValue("pid", patientId));
         PatientVO patientVO = (PatientVO) salesDAO.getByConditions(PatientVO.class, conditions);
         return new ScheduleVO(medicineVo, scheduledQuantity, 0, 0, patientVO, scheduledTime);
     }
@@ -68,21 +69,22 @@ public class DataHandler implements IDataHandler {
         return responseData;
     }
 
-    public String addMedicineSchedule(String schedule, String patientId) throws VCare {
+    public String addMedicineSchedule(String scheduleArray, String patientId) throws VCare {
 
-
-        JSONObject jsonObject = new JSONObject(schedule);
+        JSONArray jsonArray = new JSONArray(scheduleArray);
         try {
-            ScheduleVO scheduleVO = initMedicineSchedule(patientId, jsonObject, salesDAO);
-            long id = salesDAO.save(scheduleVO);
-            jsonObject = new JSONObject();
-            jsonObject.put("ScheduleId", id);
-            jsonObject.put("Result", "Record added successfully");
+            for (Object object : jsonArray) {
+                JSONObject jsonObject = new JSONObject(object.toString());
+                ScheduleVO scheduleVO = initMedicineSchedule(patientId, jsonObject, salesDAO);
+                salesDAO.save(scheduleVO);
+            }
         } catch (ParseException | org.json.JSONException e) {
-            jsonObject = new JSONObject();
+            JSONObject jsonObject = new JSONObject();
             jsonObject.put("Result", "ERROR");
             throw new VCare("MISSING REQUIRED FIELDS");
         }
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("Result", "Record added successfully");
         return jsonObject.toString();
     }
 
