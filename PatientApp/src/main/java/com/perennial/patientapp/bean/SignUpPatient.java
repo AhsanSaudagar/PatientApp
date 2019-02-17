@@ -28,6 +28,7 @@ public class SignUpPatient {
 
     private String gender;
 
+    private String pid;
 
     public String getName() {
         return name;
@@ -101,4 +102,11 @@ public class SignUpPatient {
         this.gender = gender;
     }
 
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
+    }
 }

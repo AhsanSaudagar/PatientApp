@@ -57,8 +57,9 @@ public class DataHandler implements IDataHandler {
             vo.setGuardianMobileNumber(patient.getGuardianMobileNumber());
             vo.setAddress(patient.getAddress());
             vo.setAge(patient.getAge());
+            vo.setPid(patient.getPid());
             long id = salesDAO.save(vo);
-            responseData.put("id", id);
+            responseData.put("pid", patient.getPid());
             responseData.put("message", "added successfully");
         } else {
             return null;
