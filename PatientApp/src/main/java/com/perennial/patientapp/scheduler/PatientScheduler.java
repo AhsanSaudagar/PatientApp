@@ -36,10 +36,10 @@ public class PatientScheduler {
     @Scheduled(fixedDelay = 1000 * 60 * 1)
     public void scheduleFixedRateReminder() throws VCare{
         List<Object[]> scheduleList=null;
-        int hour= LocalDateTime.now().getHour();
-        int minit= LocalDateTime.now().getMinute();
+        int hour= new Date().getHours();
+        int minit= new Date().getMinutes();
         String ampm= hour>12?"pm":"am";
-        String query="select PATIENT_ID, ID from PATIENTS_SCHEDULE where minute(TIME)=:minit and hour(TIME)=:hour";
+        String query="select PATIENT_ID, SCHEDULE_ID from PATIENTS_SCHEDULE where minute(TIME)=:minit and hour(TIME)=:hour";
         List<KeyValue> list=new ArrayList<KeyValue>();
         list.add(new KeyValue("minit",minit));
         list.add(new KeyValue("hour",hour));

@@ -50,7 +50,7 @@ public class DataController {
     @RequestMapping(value = "MedicineSchedule", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Map<String, Object> addMedicine(@RequestBody String medicineSchedule, @RequestHeader String patientId,HttpServletRequest request)  throws Exception{
-        Map<String, Object> response = dataHandler.addMedicineSchedule(medicineSchedule, patientId);
+        String response = dataHandler.addMedicineSchedule(medicineSchedule, patientId);
         return ResponseHandler.success(response);
     }
 
