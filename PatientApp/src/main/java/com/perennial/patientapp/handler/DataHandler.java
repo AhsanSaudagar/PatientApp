@@ -9,6 +9,7 @@ import com.perennial.patientapp.vo.MedicineVO;
 import com.perennial.patientapp.vo.PatientVO;
 import com.perennial.patientapp.vo.ScheduleVO;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -68,20 +69,23 @@ public class DataHandler implements IDataHandler {
         return responseData;
     }
 
-    public Map<String,Object> addMedicineSchedule(String schedule, String patientId) throws VCare {
+    public String addMedicineSchedule(String scheduleArray, String patientId) throws VCare {
 
-        Map<String,Object> result=new HashMap<>();
-        JSONObject jsonObject = new JSONObject(schedule);
+        JSONArray jsonArray = new JSONArray(scheduleArray);
         try {
-            ScheduleVO scheduleVO = initMedicineSchedule(patientId, jsonObject, salesDAO);
-            long id = salesDAO.save(scheduleVO);
-            result.put("ScheduleId", id);
-            result.put("Result", "Record added successfully");
+            for (Object object : jsonArray) {
+                JSONObject jsonObject = new JSONObject(object.toString());
+                ScheduleVO scheduleVO = initMedicineSchedule(patientId, jsonObject, salesDAO);
+                salesDAO.save(scheduleVO);
+            }
         } catch (ParseException | org.json.JSONException e) {
-            result.put("Result", "ERROR");
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("Result", "ERROR");
             throw new VCare("MISSING REQUIRED FIELDS");
         }
-        return result;
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("Result", "Record added successfully");
+        return jsonObject.toString();
     }
 
     public String updateMedicineSchedule(String schedule, String patientId) throws VCare {
