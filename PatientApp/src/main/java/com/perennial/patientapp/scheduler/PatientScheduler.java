@@ -6,6 +6,7 @@ import com.perennial.patientapp.twilio.PhoneCall;
 import com.perennial.patientapp.util.KeyValue;
 import com.perennial.patientapp.vo.IGenericVO;
 import com.perennial.patientapp.vo.PatientVO;
+import com.perennial.patientapp.vo.TrackerVO;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpRequestBase;
@@ -63,6 +64,8 @@ public class PatientScheduler {
                     URI uri = uriBuilder.build();
                     HttpRequestBase request = new HttpGet(uri);
                     HttpClientPool.getClient().execute(request);
+                    TrackerVO trackerVO = new TrackerVO(scheduleId,new Date());
+                    patientAppDAO.save(trackerVO);
                     //PhoneCall phoneCall = new PhoneCall();
                     //phoneCall.giveACall(patient.getName(),time,scheduleId,patient.getMobileNo(),patient.getGuardianMobileNumber());
                 }
