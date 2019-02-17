@@ -84,13 +84,21 @@
           };
           $(document).on("click", "#save", function() {
               var jsonObject ={};
+              var jsonArray =[];
               var medicine = $("#medicine_name1").children("option:selected"). val();
               var qty = $("#qty1").children("option:selected"). val();
               var time = $("#time1").children("option:selected"). val();
               var patientId;
-              jsonObject["medicineId"] = medicine;
-              jsonObject["scheduledQuantity"] = qty;
-              jsonObject["scheduledTime"] = time;
+              for (i = 1; i < cloneIndex; i++) {
+                  var medicine = $("#medicine_name"+i).children("option:selected"). val();
+                  var qty = $("#qty"+i).children("option:selected"). val();
+                  var time = $("#time"+i).children("option:selected"). val();
+                  jsonObject["medicineId"] = medicine;
+                  jsonObject["scheduledQuantity"] = qty;
+                  jsonObject["scheduledTime"] = time;
+                  jsonArray.push(jsonObject);
+              }
+
 
               var contextPath = $("#contextPath").val();
               $.ajax({
@@ -101,7 +109,7 @@
                   },
                   dataType : 'json',
                   url: contextPath+"/patient/MedicineSchedule",
-                  data: JSON.stringify(jsonObject),
+                  data: JSON.stringify(jsonArray),
                   success: function(response) {
                       alert(response.Result);
                   }
@@ -409,7 +417,7 @@
 
         
     var regex = /^(.+?)(\d+)$/i;
-var cloneIndex = $(".clonedInput").length;
+var cloneIndex = $(".clonedInput").length +1;
 
 function clone(){
     $(this).parents(".clonedInput").clone()
