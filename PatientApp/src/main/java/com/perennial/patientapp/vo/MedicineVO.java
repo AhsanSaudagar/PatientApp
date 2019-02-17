@@ -15,12 +15,11 @@ public class MedicineVO implements IGenericVO {
 	@Column(name = "name")
 	private String name;
 
-	@Column(name = "is_active", columnDefinition = "BIT")
-	private boolean isActive;
+	@Column(name = "is_active")
+	private Boolean isActive;
 
 	@Column(name = "createdAt")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date createdAt;
+	private String createdAt;
 
 	public long getId() {
 		return id;
@@ -38,19 +37,19 @@ public class MedicineVO implements IGenericVO {
 		this.name = name;
 	}
 
-	public boolean isActive() {
+	public Boolean isActive() {
 		return isActive;
 	}
 
-	public void setActive(boolean active) {
+	public void setActive(Boolean active) {
 		isActive = active;
 	}
 
-	public Date getCreatedAt() {
+	public String getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Date createdAt) {
+	public void setCreatedAt(String createdAt) {
 		this.createdAt = createdAt;
 	}
 }

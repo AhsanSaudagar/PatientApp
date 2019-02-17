@@ -39,7 +39,7 @@ public class PatientScheduler {
         int hour= LocalDateTime.now().getHour();
         int minit= LocalDateTime.now().getMinute();
         String ampm= hour>12?"pm":"am";
-        String query="select PATIENT_ID, ID from SCHEDULE where minute(SCHEDULED_TIME)=:minit and hour(SCHEDULED_TIME)=:hour";
+        String query="select PATIENT_ID, ID from PATIENTS_SCHEDULE where minute(TIME)=:minit and hour(TIME)=:hour";
         List<KeyValue> list=new ArrayList<KeyValue>();
         list.add(new KeyValue("minit",minit));
         list.add(new KeyValue("hour",hour));

@@ -5,8 +5,6 @@ import java.util.Date;
 public class MedicineShedule {
     private String diseaseName;
     private int scheduledQuantity;
-    private int executedQuantity;
-    private int missedQuantity;
     private Date scheduledTime;
 
     public String getDiseaseName() {
@@ -23,22 +21,6 @@ public class MedicineShedule {
 
     public void setScheduledQuantity(int scheduledQuantity) {
         this.scheduledQuantity = scheduledQuantity;
-    }
-
-    public int getExecutedQuantity() {
-        return executedQuantity;
-    }
-
-    public void setExecutedQuantity(int executedQuantity) {
-        this.executedQuantity = executedQuantity;
-    }
-
-    public int getMissedQuantity() {
-        return missedQuantity;
-    }
-
-    public void setMissedQuantity(int missedQuantity) {
-        this.missedQuantity = missedQuantity;
     }
 
     public Date getScheduledTime() {

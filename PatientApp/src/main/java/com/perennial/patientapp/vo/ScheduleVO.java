@@ -4,41 +4,50 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "SCHEDULE")
+@Table(name = "PATIENTS_SCHEDULE")
 public class ScheduleVO implements IGenericVO {
-
-    @Column(name = "SCHEDULED_QUANTITY")
-    private int scheduledQuantity;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
+    @Column(name = "SCHEDULE_ID")
     private long id;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name="MEDICINE_ID", nullable=false)
     private MedicineVO medicineVO;
 
-    @Column(name = "EXECUTED_QUANTITY")
-    private int executedQuantity;
-    @Column(name = "MISSED_QUANTITY")
-    private int missedQuantity;
+    public Boolean getActive() {
+        return isActive;
+    }
 
-    public ScheduleVO(MedicineVO medicineVO, int scheduledQuantity, int executedQuantity, int missedQuantity, PatientVO patient, Date scheduledTime) {
-        this.medicineVO = medicineVO;
+    public int getScheduledQuantity() {
+        return scheduledQuantity;
+    }
+
+    public void setScheduledQuantity(int scheduledQuantity) {
         this.scheduledQuantity = scheduledQuantity;
-        this.executedQuantity = executedQuantity;
-        this.missedQuantity = missedQuantity;
+    }
+
+    public ScheduleVO(MedicineVO medicineVO, int scheduledQuantity, PatientVO patient, Date scheduledTime) {
+        this.medicineVO = medicineVO;
         this.patient = patient;
         this.scheduledTime = scheduledTime;
+        this.scheduledQuantity = scheduledQuantity;
     }
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "PATIENT_ID")
     private PatientVO patient;
 
-    @Column(name = "SCHEDULED_TIME")
+    @Column(name = "is_active")
+    private Boolean isActive;
+
+    @Column(name = "TIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date scheduledTime;
+
+    @Column(name = "QTY")
+    private int scheduledQuantity;
 
     public ScheduleVO() {
     }
@@ -59,30 +68,6 @@ public class ScheduleVO implements IGenericVO {
         this.medicineVO = medicineVO;
     }
 
-    public int getScheduledQuantity() {
-        return scheduledQuantity;
-    }
-
-    public void setScheduledQuantity(int scheduledQuantity) {
-        this.scheduledQuantity = scheduledQuantity;
-    }
-
-    public int getExecutedQuantity() {
-        return executedQuantity;
-    }
-
-    public void setExecutedQuantity(int executedQuantity) {
-        this.executedQuantity = executedQuantity;
-    }
-
-    public int getMissedQuantity() {
-        return missedQuantity;
-    }
-
-    public void setMissedQuantity(int missedQuantity) {
-        this.missedQuantity = missedQuantity;
-    }
-
     public PatientVO getPatient() {
         return patient;
     }
@@ -93,6 +78,14 @@ public class ScheduleVO implements IGenericVO {
 
     public Date getScheduledTime() {
         return scheduledTime;
+    }
+
+    public Boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
     }
 
     public void setScheduledTime(Date scheduledTime) {
