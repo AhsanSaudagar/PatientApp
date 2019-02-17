@@ -107,8 +107,13 @@
                   url: contextPath+"/patient/MedicineSchedule",
                   data: JSON.stringify(jsonObject),
                   success: function(response) {
-                      $("#removeSchedule").attr('scheduleId',response.ScheduleId);
+                      console.log(response);
+                      sessionStorage.scheduleId = response.data.ScheduleId;
                       alert(response.Result);
+
+                  },
+                  error : function (error) {
+                     console.log(error);
                   }
               });
 
@@ -116,7 +121,7 @@
 
           $(document).on("click", "#removeSchedule", function() {
               var jsonObject ={};
-              var scheduleId = $(this).attr('scheduleId');
+              var scheduleId = sessionStorage.scheduleId;
               var contextPath = $("#contextPath").val();
               if(scheduleId ==undefined || scheduleId==null || scheduleId==0){
                   alert('schedule not exist');

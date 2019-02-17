@@ -68,22 +68,20 @@ public class DataHandler implements IDataHandler {
         return responseData;
     }
 
-    public String addMedicineSchedule(String schedule, String patientId) throws VCare {
+    public Map<String,Object> addMedicineSchedule(String schedule, String patientId) throws VCare {
 
-
+        Map<String,Object> result=new HashMap<>();
         JSONObject jsonObject = new JSONObject(schedule);
         try {
             ScheduleVO scheduleVO = initMedicineSchedule(patientId, jsonObject, salesDAO);
             long id = salesDAO.save(scheduleVO);
-            jsonObject = new JSONObject();
-            jsonObject.put("ScheduleId", id);
-            jsonObject.put("Result", "Record added successfully");
+            result.put("ScheduleId", id);
+            result.put("Result", "Record added successfully");
         } catch (ParseException | org.json.JSONException e) {
-            jsonObject = new JSONObject();
-            jsonObject.put("Result", "ERROR");
+            result.put("Result", "ERROR");
             throw new VCare("MISSING REQUIRED FIELDS");
         }
-        return jsonObject.toString();
+        return result;
     }
 
     public String updateMedicineSchedule(String schedule, String patientId) throws VCare {

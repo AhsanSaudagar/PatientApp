@@ -29,7 +29,6 @@ public class DataController {
 
 
     @RequestMapping(value = "getUserDetails", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
     public Map<String, Object> getUserDetails(@RequestParam("id") int id, HttpServletRequest request) {
         try {
             return ResponseHandler.success(dataHandler.getUserDetails(id));
@@ -39,8 +38,7 @@ public class DataController {
     }
 
     @RequestMapping(value = "MedicineSchedule", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public Map<String, Object> UpdateMedicine(HttpServletRequest request, @RequestBody String medicineSchedule, @RequestHeader String patientId) {
+    public Map<String, Object> UpdateMedicine(@RequestBody String medicineSchedule, @RequestHeader String patientId) {
         try {
             return ResponseHandler.success(dataHandler.updateMedicineSchedule(medicineSchedule, patientId));
         } catch (Exception e) {
@@ -51,12 +49,9 @@ public class DataController {
 
     @RequestMapping(value = "MedicineSchedule", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Map<String, Object> addMedicine(HttpServletRequest request, @RequestBody String medicineSchedule, @RequestHeader String patientId) {
-        try {
-            return ResponseHandler.success(dataHandler.addMedicineSchedule(medicineSchedule, patientId));
-        } catch (Exception e) {
-            return ResponseHandler.error(e);
-        }
+    public Map<String, Object> addMedicine(@RequestBody String medicineSchedule, @RequestHeader String patientId,HttpServletRequest request)  throws Exception{
+        Map<String, Object> response = dataHandler.addMedicineSchedule(medicineSchedule, patientId);
+        return ResponseHandler.success(response);
     }
 
     @RequestMapping(value = "MedicineSchedule", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
