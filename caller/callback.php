@@ -15,18 +15,20 @@ $gather = $response->gather(['action' => '/gatherProcess.php',
 $is_panic = "0";
 $is_taken = "0";
 
-if(isset($_POST['Digits']) && !empty($_POST['Digits'])){
-    if($_POST['Digits'] == 1){
-        $is_taken = "1"; //Medicine Taken
-        // $is_panic = "0"; //No Panic
-    }
-    elseif($_POST['Digits'] == 9){
-        // $is_taken = "0"; //Medicine not Taken
-        $is_panic = "1"; // Panic pressed
-    }
-	// $gather->say("You have pressed ".$_POST['Digits']);
-}
-$tracker_id = $_GET['tracker_id'];
+
+
+// if(isset($_POST['Digits']) && !empty($_POST['Digits'])){
+//     if($_POST['Digits'] == 1){
+//         $is_taken = "1"; //Medicine Taken
+//         // $is_panic = "0"; //No Panic
+//     }
+//     elseif($_POST['Digits'] == 9){
+//         // $is_taken = "0"; //Medicine not Taken
+//         $is_panic = "1"; // Panic pressed
+//     }
+// 	// $gather->say("You have pressed ".$_POST['Digits']);
+// }
+
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -42,11 +44,32 @@ try {
     // $stmt->bindParam(':created_date', $created_date);
 
 
-    $sql = "UPDATE tracker_log SET twilio_id=?,$_POST['CallSid'], user_input=?, is_taken=?, is_panic=? WHERE tracker_id=?";
+    $sql = "UPDATE tracker_log SET is_taken=?, is_panic=? ".$where;
     $stmt= $conn->prepare($sql);
-    $stmt->execute([$_POST['CallSid'],$_POST['Digits'],$is_taken, $is_panic, $tracker_id]);
+    $stmt->execute([$is_taken, $is_panic, $value]);
 
+    if(isset($_GET['tracker_id']) && !empty($_GET['tracker_id'])){
+        
+        $where = "WHERE tracker_id=?";
+        $value = $_GET['tracker_id'];
 
+        $sql = "UPDATE tracker_log SET twilio_id=? is_taken=?, is_panic=? ".$where;
+        $stmt= $conn->prepare($sql);
+        $stmt->execute([$_POST['CallSid'],$is_taken, $is_panic, $value]);
+    
+    }
+    // elseif(isset($_POST['CallSid']) && !empty($_POST['CallSid'])){
+
+    //     $where = "WHERE twilio_id=?";
+    //     $value = $_POST['CallSid'];
+
+    //     $sql = "UPDATE tracker_log SET  is_taken=?, is_panic=? ".$where;
+    //     $stmt= $conn->prepare($sql);
+    //     $stmt->execute([$is_taken, $is_panic, $value]);
+
+        
+    // }
+    
     // insert a row
     // $schedule_id = "22";
     // $is_taken = "1";
@@ -59,5 +82,5 @@ catch(PDOException $e)
         file_put_contents("debug1.log", "Error: " . $e->getMessage().PHP_EOL,FILE_APPEND);
     }
 $conn = null;
-file_put_contents("debug2.log",print_r($_POST,TRUE));
+file_put_contents("debug1.log",print_r($_POST,TRUE));
 echo $response;
