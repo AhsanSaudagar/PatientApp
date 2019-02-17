@@ -40,7 +40,7 @@ public class DataController {
 
     @RequestMapping(value = "MedicineSchedule", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Map<String, Object> UpdateMedicine(HttpServletRequest request, @RequestBody String medicineSchedule, @RequestHeader long patientId) {
+    public Map<String, Object> UpdateMedicine(HttpServletRequest request, @RequestBody String medicineSchedule, @RequestHeader String patientId) {
         try {
             return ResponseHandler.success(dataHandler.updateMedicineSchedule(medicineSchedule, patientId));
         } catch (Exception e) {
@@ -51,7 +51,7 @@ public class DataController {
 
     @RequestMapping(value = "MedicineSchedule", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Map<String, Object> addMedicine(HttpServletRequest request, @RequestBody String medicineSchedule, @RequestHeader long patientId) {
+    public Map<String, Object> addMedicine(HttpServletRequest request, @RequestBody String medicineSchedule, @RequestHeader String patientId) {
         try {
             return ResponseHandler.success(dataHandler.addMedicineSchedule(medicineSchedule, patientId));
         } catch (Exception e) {
@@ -61,7 +61,7 @@ public class DataController {
 
     @RequestMapping(value = "MedicineSchedule", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Map<String, Object> addMedicine(@RequestHeader long patientId, @RequestParam long scheduleId) {
+    public Map<String, Object> deleteMedicine(@RequestHeader long patientId, @RequestParam long scheduleId) {
         try {
             return ResponseHandler.success(dataHandler.removeSchedule(scheduleId));
         } catch (Exception e) {

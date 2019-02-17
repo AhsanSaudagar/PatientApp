@@ -88,6 +88,10 @@
               var qty = $("#qty1").children("option:selected"). val();
               var time = $("#time1").children("option:selected"). val();
               var patientId;
+              if(medicine=='Select a medicine'){
+                  alert("please select medicine");
+                  return;
+              }
               jsonObject["medicineId"] = medicine;
               jsonObject["scheduledQuantity"] = qty;
               jsonObject["scheduledTime"] = time;
@@ -103,11 +107,37 @@
                   url: contextPath+"/patient/MedicineSchedule",
                   data: JSON.stringify(jsonObject),
                   success: function(response) {
+                      $("#removeSchedule").attr('scheduleId',response.ScheduleId);
                       alert(response.Result);
                   }
               });
 
           });
+
+          $(document).on("click", "#removeSchedule", function() {
+              var jsonObject ={};
+              var scheduleId = $(this).attr('scheduleId');
+              var contextPath = $("#contextPath").val();
+              if(scheduleId ==undefined || scheduleId==null || scheduleId==0){
+                  alert('schedule not exist');
+                  return;
+              }
+              $.ajax({
+                  type: "DELETE",
+                  headers:{
+                      "Content-Type" : 'application/json',
+                      "patientId" : sessionStorage.pid,
+                      "scheduleId" : scheduleId,
+                  },
+                  dataType : 'json',
+                  url: contextPath+"/patient/MedicineSchedule",
+                  success: function(response) {
+                      alert(response.Result);
+                  }
+              });
+
+          });
+
 
           function getMedicineList() {
               var contextPath = $("#contextPath").val();
@@ -268,7 +298,7 @@
                         </div>
                         <div class="actions">
                             <input type="button" class="clone" value="Add More"></input> 
-                            <input type="button" class="remove" value="Remove"></input>
+                            <input type="button" id="removeSchedule" class="remove" value="Remove"></input>
                         </div>
                         
                     </div>

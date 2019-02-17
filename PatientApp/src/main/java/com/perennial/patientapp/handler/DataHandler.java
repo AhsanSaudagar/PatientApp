@@ -25,15 +25,16 @@ public class DataHandler implements IDataHandler {
     @Autowired
     private PatientAppDAOImpl<IGenericVO> salesDAO;
 
-    private static ScheduleVO initMedicineSchedule(long patientId, JSONObject jsonObject, PatientAppDAOImpl<IGenericVO> salesDAO) throws ParseException, VCare {
+    private static ScheduleVO initMedicineSchedule(String patientId, JSONObject jsonObject, PatientAppDAOImpl<IGenericVO> salesDAO) throws ParseException, VCare {
         long medicineId = jsonObject.getLong("medicineId");
         int scheduledQuantity = jsonObject.getInt("scheduledQuantity");
         DateFormat df = new SimpleDateFormat("2019-01-01 HH:mm:ss");
         Date scheduledTime = df.parse(jsonObject.getString("scheduledTime"));
 
         MedicineVO medicineVo = (MedicineVO) salesDAO.getById(MedicineVO.class, medicineId);
-        PatientVO patientVO = (PatientVO) salesDAO.getById(PatientVO.class, patientId);
-
+        List<KeyValue> conditions = new ArrayList<>();
+        conditions.add(new KeyValue("pid",patientId));
+        PatientVO patientVO = (PatientVO) salesDAO.getByConditions(PatientVO.class, conditions);
         return new ScheduleVO(medicineVo, scheduledQuantity, 0, 0, patientVO, scheduledTime);
     }
 
@@ -67,14 +68,15 @@ public class DataHandler implements IDataHandler {
         return responseData;
     }
 
-    public String addMedicineSchedule(String schedule, long patientId) throws VCare {
+    public String addMedicineSchedule(String schedule, String patientId) throws VCare {
 
 
         JSONObject jsonObject = new JSONObject(schedule);
         try {
             ScheduleVO scheduleVO = initMedicineSchedule(patientId, jsonObject, salesDAO);
-            salesDAO.save(scheduleVO);
+            long id = salesDAO.save(scheduleVO);
             jsonObject = new JSONObject();
+            jsonObject.put("ScheduleId", id);
             jsonObject.put("Result", "Record added successfully");
         } catch (ParseException | org.json.JSONException e) {
             jsonObject = new JSONObject();
@@ -84,7 +86,7 @@ public class DataHandler implements IDataHandler {
         return jsonObject.toString();
     }
 
-    public String updateMedicineSchedule(String schedule, long patientId) throws VCare {
+    public String updateMedicineSchedule(String schedule, String patientId) throws VCare {
         JSONObject jsonObject = new JSONObject(schedule);
         try {
             long id = jsonObject.getLong("id");
