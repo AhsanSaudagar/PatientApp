@@ -19,6 +19,10 @@ Password: Admin@123
 - Take feedback 
 - Text-to-speech 
 
+<h3>Known bugs</h3>
+  <br>
+	1 - View and Edit schedule stopped working.
+	
 <h2>Next</h2>
 
 
@@ -37,12 +41,9 @@ Password: Admin@123
 	6 - Sending SMS.
   <br>
 	7 - Mobile app.
-  <hr>
 
-<h1>Known bugs</h1>
-  <br>
-	1 - View and Edit schedule stopped working.
-	
 	
 <hr>
-Link to presentation: https://docs.google.com/presentation/d/10Tg-6O-xK4Q-xmtid_FK-p80N7M1LIt7YlyTCpRf0Gc/edit?usp=sharing
+Link to presentation: 
+<br>
+https://docs.google.com/presentation/d/10Tg-6O-xK4Q-xmtid_FK-p80N7M1LIt7YlyTCpRf0Gc/edit?usp=sharing
