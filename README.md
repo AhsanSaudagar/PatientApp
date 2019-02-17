@@ -6,7 +6,8 @@ Generally, caretakers call to see if the patient needs any help or is taking med
 
 <a href="http://52.55.222.177:8082/PatientApp/patientApp/" target="_blank">Demo link</a>
 
-User: ankit.kumbhar@perennialsys.com
+User: rakesh.shewale@perennialsys.com
+<br>
 Password: Admin@123
 
 
@@ -41,3 +42,7 @@ Password: Admin@123
 <h1>Known bugs</h1>
   <br>
 	1 - View and Edit schedule stopped working.
+	
+	
+<hr>
+Link to presentation: https://docs.google.com/presentation/d/10Tg-6O-xK4Q-xmtid_FK-p80N7M1LIt7YlyTCpRf0Gc/edit?usp=sharing
